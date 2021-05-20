@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 
 
-export default function Categories() {
+export default function FetchSample() {
     const [categories, setcategories] = useState([]);
 
     useEffect(() => {
