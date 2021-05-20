@@ -1,9 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import IndexPage from "./screens/IndexPage"
-import NavBar from "./navigation/Navigation"
-import FetchSample from './fetchsample/fetchsample';
+import { StyleSheet, View } from 'react-native';
+
 import Categories from './screens/CategoriesScreen';
 
 export default function App() {
