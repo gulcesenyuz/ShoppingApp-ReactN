@@ -2,10 +2,12 @@ import React from 'react';
 import { StyleSheet,Text, View,SafeAreaView,TouchableOpacity} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import ProductsScreen from './screens/ProductsScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
 import OrdersScreen from './screens/OrdersScreen';
+import AddCategory from './screens/AddCategory'
 
 const Tab = createBottomTabNavigator();
 
@@ -61,7 +63,6 @@ function MyTabBar({ state, descriptors, navigation }) {
   );
 }
 
-
 export default function App() {
   return (
    
@@ -69,7 +70,9 @@ export default function App() {
        <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
         <Tab.Screen style={styles.tabText} name="Products" component={ProductsScreen} />
       <Tab.Screen name="Categories" component={CategoriesScreen} />
-            <Tab.Screen name="Orders" component={OrdersScreen} />
+            <Tab.Screen  name="Orders" component={OrdersScreen} />
+            <Tab.Screen  name="AddCategory" component={AddCategory} />
+
       </Tab.Navigator>
     </NavigationContainer>
    

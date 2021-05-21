@@ -1,11 +1,13 @@
 import React from 'react';
 import { View,Animated,TouchableWithoutFeedback,Text, StyleSheet,SafeAreaView } from 'react-native';
 import {AntDesign, Entypo} from "@expo/vector-icons";
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 export default class FloatingButton extends React.Component{
 animation=new Animated.Value(0);
+
 
 toggleMenu=()=>{
   const toValue= this.open?0:1;
@@ -17,6 +19,7 @@ toggleMenu=()=>{
 }
 
   render(){
+    const { navigation } = this.props;
 
 const pinStyle={
   transform:[
@@ -43,7 +46,7 @@ const pinStyle={
 
         <TouchableWithoutFeedback>
        <Animated.View style={[styles.button, styles.secondary,pinStyle]}>
-       <Entypo name="plus" size={24} color='red'/>
+       <Entypo onPress={()=>navigation.navigate('AddCategory')} name="plus" size={24} color='red'/>
 
        </Animated.View>
        </TouchableWithoutFeedback>

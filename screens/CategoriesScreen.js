@@ -3,12 +3,14 @@ import { View, StyleSheet,SafeAreaView,ScrollView } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import Header from '../components/TopBar'
 import AntIcon from "react-native-vector-icons/AntDesign";
-import FloatingButton from '../components/FloatingButton'
+import FloatingButton from '../components/FloatingButton';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function CategoriesScreen() {
+export default function CategoriesScreen(props) {
   const [categories, setcategories] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     getData();
@@ -59,7 +61,7 @@ export default function CategoriesScreen() {
         </View>
       ))}
     </ScrollView>
-          <FloatingButton style={{bottom:80}}/>
+          <FloatingButton style={{bottom:80}} {...props} navigation={navigation}/>
 
     </SafeAreaView>
   );
