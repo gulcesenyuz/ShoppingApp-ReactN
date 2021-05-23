@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -73,28 +74,183 @@ function MyTabBar({ state, descriptors, navigation }) {
 
 const Stack = createStackNavigator();
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-              <Stack.Screen name="IndexPage" component={IndexPage} options={{ headerTitle: props => <TopBar {...props} /> }} />
+function IndexStack(){
+  return(
+          <Stack.Navigator>
+        <Stack.Screen
+          name="IndexPage"
+          component={IndexPage}
+          options={{ headerTitle: (props) => <TopBar {...props} /> }}
+        />
 
-        <Stack.Screen name="Categories" component={CategoriesScreen} 
+        <Stack.Screen
+          name="Categories"
+          component={CategoriesScreen}
+          options={{
+            title: 'Categories',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#4d4d4d',
+            headerTitleStyle: {
+              fontWeight: '800',
+            },
+          }}
         />
 
         <Stack.Screen
           name="CategoryProduct"
           component={CategoryProductsScreen}
+          options={{
+            title: 'Products',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#4d4d4d',
+            headerTitleStyle: {
+              fontWeight: '800',
+            },
+          }}
         />
-        <Stack.Screen name="Products" component={AllProductsScreen} />
-        <Stack.Screen name="ProductsDetails" component={ProductDetailScreen} />
-                <Stack.Screen name="Orders" component={OrdersScreen} />
-                                <Stack.Screen name="AddCategory" component={AddCategory} />
-
-                
-
+        <Stack.Screen
+          name="Products"
+          component={AllProductsScreen}
+          options={{
+            title: 'Products',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#4d4d4d',
+            headerTitleStyle: {
+              fontWeight: '800',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="ProductsDetails"
+          component={ProductDetailScreen}
+          options={{
+            title: 'Product Details',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#4d4d4d',
+            headerTitleStyle: {
+              fontWeight: '800',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Orders"
+          component={OrdersScreen}
+          options={{
+            title: 'Orders',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#4d4d4d',
+            headerTitleStyle: {
+              fontWeight: '800',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="AddCategory"
+          component={AddCategory}
+          options={{
+            title: 'New Category',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#4d4d4d',
+            headerTitleStyle: {
+              fontWeight: '800',
+            },
+          }}
+        />
       </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+ <Tab.Navigator 
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            if (route.name === 'Home') {
+              return (
+                <Ionicons
+                  name={
+                    focused
+                      ? 'home'
+                      : 'ios-home-outline'
+                  }
+                  size={size}
+                  color={color}
+                />
+              );
+            } else if (route.name === 'Products') {
+              return (
+                <Ionicons
+                  name={focused ? 'pricetag' : 'pricetag-outline'}
+                  size={size}
+                  color={color}
+                />
+              );
+            }
+            else if (route.name === 'Categories') {
+              return (
+                <Ionicons
+                  name={focused ? 'apps' : 'apps-outline'}
+                  size={size}
+                  color={color}
+                />
+              );
+            }
+                  else if (route.name === 'Orders') {
+              return (
+                <Ionicons
+                  name={focused ? 'cart' : 'cart-outline'}
+                  size={size}
+                  color={color}
+                />
+              );
+            }
+                        else  {
+              return (
+                <Ionicons
+                  name={focused ? 'add-circle' : 'add-circle-outline'}
+                  size={size}
+                  color={color}
+                />
+              );
+            }
+          },
+        })}
+             tabBarOptions={{
+          activeTintColor: '#ea5455',
+          inactiveTintColor: 'gray',
+        }}
+ 
+ >
+  <Tab.Screen
+          style={styles.tabText}
+          name="Home"
+          component={IndexStack}
+        />
+        <Tab.Screen
+          style={styles.tabText}
+          name="Products"
+          component={AllProductsScreen}
+        />
+        <Tab.Screen name="Categories" component={CategoriesScreen} />
+        <Tab.Screen name="Orders" component={OrdersScreen} />
+        <Tab.Screen name="AddCategory" component={AddCategory} />
+      </Tab.Navigator>
+      
     </NavigationContainer>
+    
   );
 }
 

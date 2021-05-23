@@ -46,7 +46,7 @@ const pinStyle={
 
         <TouchableWithoutFeedback>
        <Animated.View style={[styles.button, styles.secondary,pinStyle]}>
-       <Entypo onPress={()=>navigation.navigate('AddCategory')} name="plus" size={24} color='#99b898'/>
+       <Entypo onPress={()=>navigation.navigate('AddCategory')} name="plus" size={24} color='#083358'/>
 
        </Animated.View>
        </TouchableWithoutFeedback>
@@ -66,8 +66,8 @@ const pinStyle={
 
 const styles=StyleSheet.create({
   container:{
-    left:"70%",
-    top:"85%",
+    left:"75%",
+    top:"80%",
  position:"absolute",
     alignItems:'center'
   },
@@ -84,7 +84,7 @@ const styles=StyleSheet.create({
     shadowOffset:{ height:10}
   },
   menu:{
-    backgroundColor:'#99b898'
+    backgroundColor:'#083358'
   },
   secondary:{
     width:40,

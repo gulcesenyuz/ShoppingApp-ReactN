@@ -15,15 +15,10 @@ import ProductsDetailScreen from './ProductDetailScreen';
 import { NavigationContainer } from '@react-navigation/native';
 
 function ProductsScreen({ route, navigation }) {
-
-  
-  
-    const [products, setproducts] = useState([]);
-
+  const [products, setproducts] = useState([]);
 
   useEffect(() => {
     getDatafromProducts();
-   
   }, []);
 
   const deleteProduct = (id) => {
@@ -47,49 +42,46 @@ function ProductsScreen({ route, navigation }) {
       .then((products) => {
         setproducts(products);
       });
-
   };
-
 
   return (
     <SafeAreaView>
-
       <ScrollView style={{ maxHeight: '90%' }}>
         {products.map((eachData) => (
           <View style={styles.itemContainer}>
-           
-              <ListItem>
-                <ListItem.Content>
-                  <View flexDirection="row">
-                  
-                    <View flexDirection="column">
-                      <ListItem.Title style={styles.title}>
-                        {eachData.name}
-                      </ListItem.Title>
+            <ListItem>
+              <ListItem.Content>
+                <View>
+                  <View>
+                    <ListItem.Title style={styles.title}>
+                      {eachData.name}
+                    </ListItem.Title>
                       <ListItem.Subtitle style={styles.price}>
-                        Price: {eachData.unitPrice}$
+                        Price: <Text style={styles.moneyText}> {eachData.unitPrice}$</Text>
                       </ListItem.Subtitle>
-                    </View>
+                        
+                  </View>
+                  <View style={styles.row}>
                     <TouchableOpacity
-                        style={styles.detailbutton}
-                        onPress={() => {
-                          navigation.navigate('ProductsDetails', {
-                            itemId: eachData.id,
-                          });
-                        }}>
-                        <Text style={styles.detailtext}>Show Details</Text>
-                      </TouchableOpacity>
-                    <View>
+                      style={styles.detailbutton}
+                      onPress={() => {
+                        navigation.navigate('ProductsDetails', {
+                          itemId: eachData.id,
+                        });
+                      }}>
+                      <Text style={styles.detailtext}>Show Details</Text>
+                    </TouchableOpacity>
+                    <View style={styles.iconPosition}>
                       <AntIcon
                         name="delete"
                         style={styles.deleteIcon}
                         onPress={() => deleteProduct(eachData.id)}
                       />
-                      
                     </View>
                   </View>
-                </ListItem.Content>
-              </ListItem>
+                </View>
+              </ListItem.Content>
+            </ListItem>
           </View>
         ))}
       </ScrollView>
@@ -102,21 +94,27 @@ const styles = StyleSheet.create({
     flex: 1,
     color: 'grey',
     fontSize: 20,
-
     margin: 10,
   },
+  iconPosition: {
+    paddingTop: 15,
+    position: 'relative',
+    marginLeft: 100,
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+  },
   title: {
-    flex: 1,
-
-    color: '#1e3d59',
-    fontWeight: '600',
+    color: '#f07b3f',
+    fontWeight: '700',
     margin: 5,
     fontSize: 18,
   },
   price: {
     flex: 1,
-    color: '#ff6e40',
-    fontWeight: '500',
+    color: 'grey',
+    fontWeight: '600',
     margin: 5,
     fontSize: 16,
   },
@@ -133,25 +131,28 @@ const styles = StyleSheet.create({
     borderColor: '#f5f0e1',
   },
   detailbutton: {
-        flex: 1,
-
-    marginLeft: '60%',
-    paddingBottom: '10%',
+    marginTop: 20,
+    height: 30,
+    position: 'relative',
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#99b898',
-    backgroundColor:'#99b898',
-    alignContent:"center",
-    alignItems:"center",
+    borderColor: '#ffd460',
+    backgroundColor: '#ffd460',
+    alignItems: 'center',
+    alignContent: 'space-around',
   },
-  detailtext:{
-        flex: 1,
-    alignItems:"center",
-paddingHorizontal:1,
-paddingVertical:5,
-paddingTop:15,
-    fontSize:14,
-    fontWeight:'600'
+  detailtext: {
+    flex: 1,
+    padding: 10,
+    paddingTop: 5,
+    alignItems: 'center',
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  moneyText:{
+    color: 'grey',
+    fontWeight:'400'
+
   }
 });
 export default ProductsScreen;

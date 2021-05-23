@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet,TouchableOpacity,Text,SafeAreaView,ScrollView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import { ListItem } from 'react-native-elements';
-import Header from '../components/TopBar'
-import AntIcon from "react-native-vector-icons/AntDesign";
+import Header from '../components/TopBar';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 import FloatingButton from '../components/FloatingButton';
 import { useNavigation } from '@react-navigation/native';
 import CategoryProductsScreen from './CategoryProductsScreen';
-
 
 export default function CategoriesScreen({ route, navigation }) {
   const [categories, setcategories] = useState([]);
@@ -39,37 +45,42 @@ export default function CategoriesScreen({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView style={{height:'100%'}}>
-     
-    <ScrollView style={{maxHeight:"99%"}}>
-      {categories.map((eachData) => (
-        <View style={styles.itemContainer}>
-          <ListItem>
-            <ListItem.Content>
-              <ListItem.Title style={styles.title}>
-                {eachData.name}
-              </ListItem.Title>
-              <ListItem.Subtitle style={styles.description}>
-                {eachData.description}
-              </ListItem.Subtitle>
-                <TouchableOpacity
-                        style={styles.detailbutton}
-                         onPress={() => {
-                          navigation.navigate('CategoryProduct', {
-                            itemId: eachData.id,
-                          });
-                        }}>
-                        <Text style={styles.detailtext}>Products</Text>
-                      </TouchableOpacity>
-                                              <AntIcon name="delete" style={styles.deleteIcon} onPress={() => deleteCategory(eachData.id)} />
-
-            </ListItem.Content>
-          </ListItem>
-        </View>
-      ))}
-    </ScrollView>
-              <FloatingButton style={{bottom:80}}  navigation={navigation}/>
-            
+    <SafeAreaView style={{ height: '100%' }}>
+      <ScrollView style={{ maxHeight: '99%' }}>
+        {categories.map((eachData) => (
+          <View style={styles.itemContainer}>
+            <ListItem>
+              <ListItem.Content>
+                <ListItem.Title style={styles.title}>
+                  {eachData.name}
+                </ListItem.Title>
+                <ListItem.Subtitle style={styles.description}>
+                  {eachData.description}
+                </ListItem.Subtitle>
+                <View style={styles.row}>
+                  <TouchableOpacity
+                    style={styles.detailbutton}
+                    onPress={() => {
+                      navigation.navigate('CategoryProduct', {
+                        itemId: eachData.id,
+                      });
+                    }}>
+                    <Text style={styles.detailtext}>Products</Text>
+                  </TouchableOpacity>
+                  <View style={styles.iconPosition}>
+                    <AntIcon
+                      name="delete"
+                      style={styles.deleteIcon}
+                      onPress={() => deleteCategory(eachData.id)}
+                    />
+                  </View>
+                </View>
+              </ListItem.Content>
+            </ListItem>
+          </View>
+        ))}
+      </ScrollView>
+      <FloatingButton style={{ bottom: 80 }} navigation={navigation} />
     </SafeAreaView>
   );
 }
@@ -81,10 +92,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10,
   },
+  iconPosition: {
+    paddingTop: 15,
+    position: 'relative',
+    marginLeft: 120,
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+  },
   title: {
-    flex: 1,
-    color: '#1e3d59',
-    fontWeight: '600',
+     color: '#f07b3f',
+    fontWeight: '700',
     margin: 5,
     fontSize: 18,
   },
@@ -106,25 +125,23 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     borderColor: '#f5f0e1',
   },
-   detailbutton: {
-        flex: 1,
-
-    marginLeft: '60%',
-    paddingBottom: '10%',
+  detailbutton: {
+    marginTop: 20,
+    height: 30,
+    position: 'relative',
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#99b898',
-    backgroundColor:'#99b898',
-    alignContent:"center",
-    alignItems:"center",
+    borderColor: '#ffd460',
+    backgroundColor: '#ffd460',
+    alignItems: 'center',
+    alignContent: 'space-around',
   },
-  detailtext:{
-        flex: 1,
-    alignItems:"center",
-paddingHorizontal:1,
-paddingVertical:5,
-paddingTop:15,
-    fontSize:14,
-    fontWeight:'600'
-  }
+  detailtext: {
+   flex: 1,
+    padding: 15,
+    paddingTop: 5,
+    alignItems: 'center',
+    fontSize: 12,
+    fontWeight: '600',
+  },
 });
