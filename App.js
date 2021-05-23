@@ -1,13 +1,22 @@
 import React from 'react';
-import { StyleSheet,Text, View,SafeAreaView,TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import ProductsScreen from './screens/ProductsScreen';
+import AllProductsScreen from './screens/AllProductsScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
 import OrdersScreen from './screens/OrdersScreen';
-import AddCategory from './screens/AddCategory'
+import ProductDetailScreen from './screens/ProductDetailScreen';
+import CategoryProductsScreen from './screens/CategoryProductsScreen';
+import TopBar from './components/TopBar';
+import IndexPage from './screens/IndexPage';
+import AddCategory from './screens/AddCategory';
 
 const Tab = createBottomTabNavigator();
 
@@ -51,8 +60,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1 }}
-          >
+            style={{ flex: 1 }}>
             <Text style={{ color: isFocused ? '#ff6e40' : 'grey' }}>
               {label}
             </Text>
@@ -63,26 +71,36 @@ function MyTabBar({ state, descriptors, navigation }) {
   );
 }
 
+const Stack = createStackNavigator();
+
 export default function App() {
   return (
-   
-       <NavigationContainer>
-       <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
-        <Tab.Screen style={styles.tabText} name="Products" component={ProductsScreen} />
-      <Tab.Screen name="Categories" component={CategoriesScreen} />
-            <Tab.Screen  name="Orders" component={OrdersScreen} />
-            <Tab.Screen  name="AddCategory" component={AddCategory} />
+    <NavigationContainer>
+      <Stack.Navigator>
+              <Stack.Screen name="IndexPage" component={IndexPage} options={{ headerTitle: props => <TopBar {...props} /> }} />
 
-      </Tab.Navigator>
+        <Stack.Screen name="Categories" component={CategoriesScreen} 
+        />
+
+        <Stack.Screen
+          name="CategoryProduct"
+          component={CategoryProductsScreen}
+        />
+        <Stack.Screen name="Products" component={AllProductsScreen} />
+        <Stack.Screen name="ProductsDetails" component={ProductDetailScreen} />
+                <Stack.Screen name="Orders" component={OrdersScreen} />
+                                <Stack.Screen name="AddCategory" component={AddCategory} />
+
+                
+
+      </Stack.Navigator>
     </NavigationContainer>
-   
   );
 }
 
 const styles = StyleSheet.create({
-  tabText:{
-    fontWeight:'800',
-    fontSize:'24'
-
-  }
-})
+  tabText: {
+    fontWeight: '800',
+    fontSize: '24',
+  },
+});

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import {
   View,
+  Text,
   TextInput,
   StyleSheet,
+  TouchableOpacity,
   SafeAreaView,
   ScrollView,
   Button,
@@ -15,7 +17,12 @@ const AddCategory = () => {
   const [description, setdescription] = useState('');
 
   const send = () => {
-    let requestOptions = {
+    if(categoryName.length <= 2){
+        alert('Category name can not shorter then 2 characters !');
+    }else if(categoryName[0] == " "){
+      alert('Category name can not start with space !');
+    }else{
+          let requestOptions = {
       method: 'POST',
       body: JSON.stringify({ name: categoryName, description: description }),
       headers: {
@@ -26,26 +33,75 @@ const AddCategory = () => {
     fetch('https://northwind.vercel.app/api/categories', requestOptions)
       .then((res) => res.json())
       .then((data) => {
-alert(`New Category ${categoryName} Added`)      });
-  };
+        alert(`New Category ${categoryName} Added`);
+      });
+  }
+    }
+
 
   return (
     <SafeAreaView>
-      <Header title="GG Shop" />
 
       <ScrollView>
+        <View style={{ alignItems: 'center', marginTop: '30%' }}>
+          <Text style={styles.formText}>
+            Please fill the form to add a new category
+          </Text>
+        </View>
         <Input
+          style={styles.input}
+          autoCapitalize="true"
+          placeholderTextColor="grey"
+          underlineColorAndroid="transparent"
           placeholder="Category Name"
           onChangeText={(value) => setcategoryName(value)}
         />
 
         <Input
+          style={styles.input}
+          underlineColorAndroid="transparent"
+          placeholderTextColor="grey"
           placeholder="Description"
           onChangeText={(value) => setdescription(value)}
         />
-        <Button onPress={() => send()} title="Post" />
+        <TouchableOpacity style={styles.button} onPress={send}>
+          <Text>Share</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  formText: {
+    flex: 1,
+    color: 'black',
+    textShadowColor: 5,
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: '20%',
+  },
+  input: {
+    flex: 1,
+    marginHorizontal:'5%',
+    margin: 5,
+    height: 40,
+    borderColor: 'transparent',
+    borderWidth: 0.5,
+    
+  },
+
+  button: {
+    flex: 1,
+    padding: 10,
+    borderRadius:15,
+    marginLeft:'30%',
+    width: '40%',
+    alignContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#99b898',
+    margin: '10%',
+  },
+});
+
 export default AddCategory;

@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet,SafeAreaView,ScrollView } from 'react-native';
+import { View, StyleSheet,TouchableOpacity,Text,SafeAreaView,ScrollView } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import Header from '../components/TopBar'
 import AntIcon from "react-native-vector-icons/AntDesign";
 import FloatingButton from '../components/FloatingButton';
 import { useNavigation } from '@react-navigation/native';
+import CategoryProductsScreen from './CategoryProductsScreen';
 
 
-
-export default function CategoriesScreen(props) {
+export default function CategoriesScreen({ route, navigation }) {
   const [categories, setcategories] = useState([]);
-  const navigation = useNavigation();
 
   useEffect(() => {
     getData();
@@ -41,7 +40,6 @@ export default function CategoriesScreen(props) {
 
   return (
     <SafeAreaView style={{height:'100%'}}>
-     <Header title='GG Shop' />
      
     <ScrollView style={{maxHeight:"99%"}}>
       {categories.map((eachData) => (
@@ -54,6 +52,15 @@ export default function CategoriesScreen(props) {
               <ListItem.Subtitle style={styles.description}>
                 {eachData.description}
               </ListItem.Subtitle>
+                <TouchableOpacity
+                        style={styles.detailbutton}
+                         onPress={() => {
+                          navigation.navigate('CategoryProduct', {
+                            itemId: eachData.id,
+                          });
+                        }}>
+                        <Text style={styles.detailtext}>Products</Text>
+                      </TouchableOpacity>
                                               <AntIcon name="delete" style={styles.deleteIcon} onPress={() => deleteCategory(eachData.id)} />
 
             </ListItem.Content>
@@ -61,8 +68,8 @@ export default function CategoriesScreen(props) {
         </View>
       ))}
     </ScrollView>
-          <FloatingButton style={{bottom:80}} {...props} navigation={navigation}/>
-
+              <FloatingButton style={{bottom:80}}  navigation={navigation}/>
+            
     </SafeAreaView>
   );
 }
@@ -99,4 +106,25 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     borderColor: '#f5f0e1',
   },
+   detailbutton: {
+        flex: 1,
+
+    marginLeft: '60%',
+    paddingBottom: '10%',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#99b898',
+    backgroundColor:'#99b898',
+    alignContent:"center",
+    alignItems:"center",
+  },
+  detailtext:{
+        flex: 1,
+    alignItems:"center",
+paddingHorizontal:1,
+paddingVertical:5,
+paddingTop:15,
+    fontSize:14,
+    fontWeight:'600'
+  }
 });

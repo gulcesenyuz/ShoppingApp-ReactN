@@ -1,41 +1,43 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { View, Text, Image,StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Header = props => {
-
-    return (
-        <View style={styles.header}>
-            <Text style={styles.headerTitle}>{props.title}</Text>
-            <View>
-                <Text style={styles.exit}>Log out</Text>
-            </View>
-        </View>
-    );
-
+function TopBar() {
+  return (
+    <View style={{    
+            flexDirection: "row",
+            alignContent: "space-between",
+          }}>
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={require('./img/dish.png')}
+      />
+      <View style={styles.nameContainer}>
+      <Text style={styles.brandname}>GG Food Shop</Text>
+      </View>
+    </View>
+  );
 }
 
-const styles = StyleSheet.create({
-    header: {
-        alignSelf: 'stretch',
-        height: 52,
-        flexDirection: 'row', // row
-        backgroundColor: '#1e3d59',
-        alignItems: 'center',
-        justifyContent: 'space-between', // center, space-around
-        paddingLeft: 10,
-        paddingRight: 10
-    },
-    headerTitle: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: '600'
-    },
-    exit: {
-        color: '#f5f5f5',
-        fontSize: 16,
-        fontWeight: '400',
 
-    }
+const styles = StyleSheet.create({
+  nameContainer: {
+    flex: 1,
+    paddingHorizontal:20,
+    paddingVertical:15,
+    alignContent:'flex-start',
+    alignItems:'flex-start',
+    
+  },
+  brandname: {
+    color:'#4d4d4d',
+    fontSize:18,
+    fontWeight:'800'
+
+
+  }
+
 });
 
-export default Header;
+export default TopBar;

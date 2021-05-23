@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet,SafeAreaView, ScrollView } from 'react-native';
+import { View,TouchableOpacity, StyleSheet,SafeAreaView, ScrollView,Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import Header from '../components/TopBar'
 import AntIcon from "react-native-vector-icons/AntDesign";
+import ProductsDetailScreen from './ProductDetailScreen'
+import { NavigationContainer } from '@react-navigation/native';
 
 
-export default function ProductsScreen() {
+function ProductsScreen ({navigation}) {
   const [categories, setcategories] = useState([]);
 
   useEffect(() => {
@@ -34,6 +36,13 @@ export default function ProductsScreen() {
         setcategories(categories);
       });
   };
+  
+  const nav =(id)=>{
+    console.log(id);
+    //navigation.navigate('ProductsScreen', {id:id})
+
+  };
+
 
   return (
     <SafeAreaView>
@@ -42,6 +51,8 @@ export default function ProductsScreen() {
     <ScrollView style={{maxHeight:"90%"}}>
       {categories.map((eachData) => (
         <View style={styles.itemContainer}>
+                      <TouchableOpacity onPress={()=>nav(eachData.id)}>
+
           <ListItem>
             <ListItem.Content>
               <View flexDirection="row">
@@ -60,11 +71,16 @@ export default function ProductsScreen() {
               </View>
             </ListItem.Content>
           </ListItem>
+                                </TouchableOpacity>
+
         </View>
+
       ))}
     </ScrollView>
     </SafeAreaView>
-  );
+  )
+
+
 }
 
 const styles = StyleSheet.create({
@@ -93,6 +109,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     margin: 10,
+    marginHorizontal:'5%',
     borderRadius: 30,
     elevation: 5,
     shadowColor: 'grey',
@@ -102,3 +119,4 @@ const styles = StyleSheet.create({
     borderColor: '#f5f0e1',
   },
 });
+export default ProductsScreen;
