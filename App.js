@@ -10,14 +10,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import AllProductsScreen from './screens/AllProductsScreen';
-import CategoriesScreen from './screens/CategoriesScreen';
+import AllProductsScreen from './screens/Product/AllProductsScreen';
+import CategoriesScreen from './screens/Category/CategoriesScreen';
 import OrdersScreen from './screens/OrdersScreen';
-import ProductDetailScreen from './screens/ProductDetailScreen';
-import CategoryProductsScreen from './screens/CategoryProductsScreen';
+import ProductDetailScreen from './screens/Product/ProductDetailScreen';
+import CategoryProductsScreen from './screens/Category/CategoryProductsScreen';
 import TopBar from './components/TopBar';
 import IndexPage from './screens/IndexPage';
-import AddCategory from './screens/AddCategory';
+import AddCategory from './screens/Category/AddCategory';
 
 const Tab = createBottomTabNavigator();
 
@@ -74,44 +74,10 @@ function MyTabBar({ state, descriptors, navigation }) {
 
 const Stack = createStackNavigator();
 
-function IndexStack(){
+function ProductStack(){
   return(
           <Stack.Navigator>
-        <Stack.Screen
-          name="IndexPage"
-          component={IndexPage}
-          options={{ headerTitle: (props) => <TopBar {...props} /> }}
-        />
-
-        <Stack.Screen
-          name="Categories"
-          component={CategoriesScreen}
-          options={{
-            title: 'Categories',
-            headerStyle: {
-              backgroundColor: '#fff',
-            },
-            headerTintColor: '#4d4d4d',
-            headerTitleStyle: {
-              fontWeight: '800',
-            },
-          }}
-        />
-
-        <Stack.Screen
-          name="CategoryProduct"
-          component={CategoryProductsScreen}
-          options={{
-            title: 'Products',
-            headerStyle: {
-              backgroundColor: '#fff',
-            },
-            headerTintColor: '#4d4d4d',
-            headerTitleStyle: {
-              fontWeight: '800',
-            },
-          }}
-        />
+ 
         <Stack.Screen
           name="Products"
           component={AllProductsScreen}
@@ -140,11 +106,20 @@ function IndexStack(){
             },
           }}
         />
+      </Stack.Navigator>
+  );
+}
+
+
+function CategoryStack(){
+  return(
+          <Stack.Navigator>
+ 
         <Stack.Screen
-          name="Orders"
-          component={OrdersScreen}
+          name="Categories"
+          component={CategoriesScreen}
           options={{
-            title: 'Orders',
+            title: 'Categories',
             headerStyle: {
               backgroundColor: '#fff',
             },
@@ -155,10 +130,24 @@ function IndexStack(){
           }}
         />
         <Stack.Screen
+          name="CategoryProducts"
+          component={CategoryProductsScreen}
+          options={{
+            title: 'Category Products',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#4d4d4d',
+            headerTitleStyle: {
+              fontWeight: '800',
+            },
+          }}
+        />
+                <Stack.Screen
           name="AddCategory"
           component={AddCategory}
           options={{
-            title: 'New Category',
+            title: 'Add Category',
             headerStyle: {
               backgroundColor: '#fff',
             },
@@ -171,6 +160,8 @@ function IndexStack(){
       </Stack.Navigator>
   );
 }
+
+
 
 export default function App() {
   return (
@@ -237,16 +228,16 @@ export default function App() {
   <Tab.Screen
           style={styles.tabText}
           name="Home"
-          component={IndexStack}
+          component={IndexPage}
+          
         />
         <Tab.Screen
           style={styles.tabText}
           name="Products"
-          component={AllProductsScreen}
+          component={ProductStack}
         />
-        <Tab.Screen name="Categories" component={CategoriesScreen} />
+        <Tab.Screen name="Categories" component={CategoryStack} />
         <Tab.Screen name="Orders" component={OrdersScreen} />
-        <Tab.Screen name="AddCategory" component={AddCategory} />
       </Tab.Navigator>
       
     </NavigationContainer>

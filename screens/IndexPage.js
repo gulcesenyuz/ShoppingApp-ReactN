@@ -8,15 +8,17 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import CategoryProductsScreen from './CategoryProductsScreen';
+import CategoryProductsScreen from './Category/CategoryProductsScreen';
 
-import AllProductsScreen from '../screens/AllProductsScreen';
+import AllProductsScreen from './Product/AllProductsScreen';
+import TopBar from '../components/TopBar'
 
 export default function IndexPage ({ route, navigation })  {
 
 
     return (
       <View style={styles.main}>
+       <TopBar /> 
       <View style={styles.sizedBox}/>
       <TouchableOpacity
         style={styles.item}
