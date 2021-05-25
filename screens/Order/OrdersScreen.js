@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  SafeAreaView,
-  ScrollView,
-} from 'react-native';
+import { View, StyleSheet, Text,TouchableOpacity,SafeAreaView,ScrollView } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import Header from '../../components/TopBar';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
-import FloatingButton from '../../components/FloatingButton';
-import CategoryProductsScreen from './CategoryProductsScreen';
 
-export default function CategoriesScreen({ route, navigation }) {
-  const [categories, setcategories] = useState([]);
+function OrdersScreen({ route, navigation }) {
+  const [orders, setorders] = useState([]);
 
   useEffect(() => {
     getData();
@@ -26,7 +17,7 @@ export default function CategoriesScreen({ route, navigation }) {
       method: 'DELETE',
       body: JSON.stringify({ id: id }),
     };
-    fetch('https://northwind.vercel.app/api/categories/' + id, requestOptions)
+    fetch('https://northwind.vercel.app/api/orders' + id, requestOptions)
       .then((res) => res.json)
       .then((data) => {
         //To resfresh data list
@@ -35,80 +26,69 @@ export default function CategoriesScreen({ route, navigation }) {
   };
 
   const getData = () => {
-    fetch('https://northwind.vercel.app/api/categories')
+    fetch('https://northwind.vercel.app/api/orders')
       .then((res) => res.json())
       .catch((error) => console.error(error))
-      .then((categories) => {
-        setcategories(categories);
+      .then((orders) => {
+        setorders(orders);
       });
   };
 
   return (
-    <SafeAreaView style={{ height: '100%' }}>
-    <View style={styles.main}>
-      <ScrollView style={{ maxHeight: '99%' }}>
-        {categories.map((eachData) => (
+    <SafeAreaView style={{height:'100%'}}>
+    <ScrollView style={{maxHeight:"99%"}}>
+
+      <View>
+        {orders.map((eachData) => (
           <View style={styles.itemContainer}>
             <ListItem>
               <ListItem.Content>
                 <ListItem.Title style={styles.title}>
-                  {eachData.name}
+                  Customer: {eachData.customerId}
                 </ListItem.Title>
                 <ListItem.Subtitle style={styles.description}>
-                  {eachData.description}
+                  Order date: {eachData.orderDate}
                 </ListItem.Subtitle>
-                <View style={styles.row}>
+            <View style={styles.row}>
                   <TouchableOpacity
-                    style={styles.detailbutton}
-                    onPress={() => {
-                      navigation.navigate('CategoryProducts', {
-                        itemId: eachData.id,
-                      });
-                    }}>
-                    <Text style={styles.detailtext}>Products</Text>
-                  </TouchableOpacity>
-                  <View style={styles.iconPosition}>
-                    <AntIcon
-                      name="delete"
-                      style={styles.deleteIcon}
-                      onPress={() => deleteCategory(eachData.id)}
-                    />
-                  </View>
+                        style={styles.detailbutton}
+                        onPress={() => {
+                          navigation.navigate('OrderDetailScreen', {
+                            itemId: eachData.id,
+                          });
+                        }}>
+                        <Text style={styles.detailtext}>More</Text>
+                      </TouchableOpacity>
+                      <View style={styles.iconPosition}>
+                <AntIcon
+                  name="delete"
+                  style={styles.deleteIcon}
+                  onPress={() => deleteCategory(eachData.id)}
+                />
                 </View>
+            </View>
               </ListItem.Content>
             </ListItem>
           </View>
         ))}
-      </ScrollView>
-      <FloatingButton style={{ bottom: 80 }} navigation={navigation} />
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-    main: {
-    flex: 1,
-  },
   deleteIcon: {
     flex: 1,
     color: 'grey',
     fontSize: 20,
+
     margin: 10,
   },
-  iconPosition: {
-    paddingTop: 15,
-    position: 'relative',
-    marginLeft: 140,
-  },
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-  },
   title: {
-    letterSpacing:0.5,
-
-    color: '#f07b3f',
+    flex: 1,
+letterSpacing:0.5,
+    color: '#1e3d59',
     fontWeight: '700',
     margin: 5,
     fontSize: 18,
@@ -120,11 +100,19 @@ const styles = StyleSheet.create({
     margin: 5,
     fontSize: 16,
   },
+   iconPosition: {
+    paddingTop: 15,
+    position: 'relative',
+    marginLeft: 150,
+  },
+    row: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+  },
   itemContainer: {
     flex: 1,
-    margin: 10,
-    marginHorizontal: '5%',
-    borderRadius: 30,
+margin: 10,
+    marginHorizontal: '5%',    borderRadius: 30,
     elevation: 5,
     shadowColor: 'grey',
     shadowOffset: { width: 0, height: 1 },
@@ -132,7 +120,7 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     borderColor: '#f5f0e1',
   },
-  detailbutton: {
+    detailbutton: {
     marginTop: 20,
     height: 30,
     position: 'relative',
@@ -144,11 +132,12 @@ const styles = StyleSheet.create({
     alignContent: 'space-around',
   },
   detailtext: {
-   flex: 1,
-    padding: 15,
+    flex: 1,
+    padding: 10,
     paddingTop: 5,
     alignItems: 'center',
     fontSize: 12,
     fontWeight: '600',
   },
 });
+export default OrdersScreen;

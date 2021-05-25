@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     main: {
     flex: 1,
     
-    backgroundColor: 'white',
   },
   moredetailtitle:{
     fontWeight:'700',

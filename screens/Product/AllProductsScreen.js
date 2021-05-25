@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
+  Alert,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import AntIcon from 'react-native-vector-icons/AntDesign';
@@ -16,12 +17,34 @@ import { NavigationContainer } from '@react-navigation/native';
 function ProductsScreen({ route, navigation }) {
   const [products, setproducts] = useState([]);
 
+
   useEffect(() => {
     getDatafromProducts();
   }, []);
 
+  
+  const showConfirmDialog = () => {
+    console.log('alert');
+    return Alert.alert(
+      "Are your sure?",
+      "Are you sure you want to remove this beautiful box?",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+          },
+        },
+  
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
+
   const deleteProduct = (id) => {
     console.log(id);
+     showConfirmDialog();
     let requestOptions = {
       method: 'DELETE',
       body: JSON.stringify({ id: id }),
@@ -45,50 +68,58 @@ function ProductsScreen({ route, navigation }) {
 
   return (
     <SafeAreaView>
-      <ScrollView style={{ maxHeight: '90%' }}>
-        {products.map((eachData) => (
-          <View style={styles.itemContainer}>
-            <ListItem>
-              <ListItem.Content>
-                <View>
+      <View style={styles.main}>
+        <ScrollView style={{ maxHeight: '90%' }}>
+          {products.map((eachData) => (
+            <View style={styles.itemContainer}>
+              <ListItem>
+                <ListItem.Content>
                   <View>
-                    <ListItem.Title style={styles.title}>
-                      {eachData.name}
-                    </ListItem.Title>
+                    <View>
+                      <ListItem.Title style={styles.title}>
+                        {eachData.name}
+                      </ListItem.Title>
                       <ListItem.Subtitle style={styles.price}>
-                        Price: <Text style={styles.moneyText}> {eachData.unitPrice}$</Text>
+                        Price:{' '}
+                        <Text style={styles.moneyText}>
+                          {' '}
+                          {eachData.unitPrice}$
+                        </Text>
                       </ListItem.Subtitle>
-                        
-                  </View>
-                  <View style={styles.row}>
-                    <TouchableOpacity
-                      style={styles.detailbutton}
-                      onPress={() => {
-                        navigation.navigate('ProductsDetails', {
-                          itemId: eachData.id,
-                        });
-                      }}>
-                      <Text style={styles.detailtext}>Show Details</Text>
-                    </TouchableOpacity>
-                    <View style={styles.iconPosition}>
-                      <AntIcon
-                        name="delete"
-                        style={styles.deleteIcon}
-                        onPress={() => deleteProduct(eachData.id)}
-                      />
+                    </View>
+                    <View style={styles.row}>
+                      <TouchableOpacity
+                        style={styles.detailbutton}
+                        onPress={() => {
+                          navigation.navigate('ProductsDetails', {
+                            itemId: eachData.id,
+                          });
+                        }}>
+                        <Text style={styles.detailtext}>Show Details</Text>
+                      </TouchableOpacity>
+                      <View style={styles.iconPosition}>
+                        <AntIcon
+                          name="delete"
+                          style={styles.deleteIcon}
+                          onPress={() => deleteProduct(eachData.id)}
+                        />
+                      </View>
                     </View>
                   </View>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          </View>
-        ))}
-      </ScrollView>
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+     main: {
+    flex: 1,
+  },
   deleteIcon: {
     flex: 1,
     color: 'grey',
@@ -98,7 +129,7 @@ const styles = StyleSheet.create({
   iconPosition: {
     paddingTop: 15,
     position: 'relative',
-    marginLeft: 100,
+    marginLeft: 120,
   },
   row: {
     flexDirection: 'row',
@@ -109,6 +140,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     margin: 5,
     fontSize: 18,
+    letterSpacing:0.5,
+
   },
   price: {
     flex: 1,
@@ -148,10 +181,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
   },
-  moneyText:{
+  moneyText: {
     color: 'grey',
-    fontWeight:'400'
-
-  }
+    fontWeight: '400',
+  },
 });
 export default ProductsScreen;

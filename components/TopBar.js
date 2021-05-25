@@ -7,6 +7,8 @@ function TopBar() {
   return (
     <View style={{    
             flexDirection: "row",
+          padding:10,
+          backgroundColor:'#fff',
             alignContent: "space-between",
           }}>
       <Image

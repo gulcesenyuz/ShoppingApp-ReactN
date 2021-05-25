@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
+  SafeAreaView,
   View,
   Text,
   TouchableOpacity,
@@ -17,8 +18,10 @@ export default function IndexPage ({ route, navigation })  {
 
 
     return (
+      <SafeAreaView>
       <View style={styles.main}>
        <TopBar /> 
+       <View  style={styles.body}>
       <View style={styles.sizedBox}/>
       <TouchableOpacity
         style={styles.item}
@@ -47,6 +50,8 @@ export default function IndexPage ({ route, navigation })  {
       
       </TouchableOpacity>
       </View>
+      </View>
+      </SafeAreaView>
     );
  
 
@@ -56,9 +61,12 @@ export default function IndexPage ({ route, navigation })  {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    padding: 5,
-    backgroundColor: 'white',
   },
+  body:{
+    marginVertical:'10%',
+    marginHorizontal:'1%'
+  },
+
   item: {
     flex: 1,
     height: 200,
@@ -88,7 +96,8 @@ const styles = StyleSheet.create({
   },
   sizedBox:{
     flex:1,
-    height:30,
+    margin:10,
+    height:50,
   }
 });
 
