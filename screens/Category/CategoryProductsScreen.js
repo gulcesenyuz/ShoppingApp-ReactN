@@ -67,7 +67,7 @@ function CategoryProductsScreen({ route, navigation }) {
                     <TouchableOpacity
                       style={styles.detailbutton}
                       onPress={() => {
-                        navigation.navigate('ProductsDetails', {
+                        navigation.navigate('ProductDetailScreen', {
                           itemId: eachData.id,
                         });
                       }}>

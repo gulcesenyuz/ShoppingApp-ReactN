@@ -26,7 +26,7 @@ function ProductsScreen({ route, navigation }) {
   const showConfirmDialog = () => {
     console.log('alert');
     return Alert.alert(
-      "Are your sure?",
+      "Are you sure?",
       "Are you sure you want to remove this beautiful box?",
       [
         {

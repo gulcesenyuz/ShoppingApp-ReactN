@@ -14,42 +14,70 @@ function OrderDetailScreen({ route, navigation }) {
   const { itemId } = route.params;
 
   const [order, setorder] = useState({});
+  const [details, setdetails] = useState({});
+  const [shipAddress, setshipAddress] = useState({});
 
   useEffect(() => {
-    fetch('https://northwind.vercel.app/api/orders' + itemId)
+    fetch('https://northwind.vercel.app/api/orders/' + itemId)
       .then((res) => res.json())
       .catch((error) => console.error(error))
       .then((order) => {
         setorder(order);
-      });
-  }, []);
+        if(order['details'] != null){
+          setdetails(order['details']);
+          }
+     
+        setshipAddress(order['shipAddress']);
+      
+      });""
+  },[shipAddress]);
 
   return (
     <View style={styles.main}>
       <View style={styles.itemContainer}>
-        <Text style={styles.title}>{order['customerId']}</Text>
+        <Text style={styles.title}>{order['customerId']} Order</Text>
+
         <View style={styles.line}></View>
         <View>
           <Text style={styles.details}>
+            Customer:{' '}
+            <Text style={styles.detailinfo}> {order['customerId']}</Text>
+          </Text>
+          <Text style={styles.details}>
             Order Date:{' '}
             <Text style={styles.detailinfo}> {order['orderDate']}</Text>
-          </Text>
+          </Text>{' '}
           <Text style={styles.details}>
             Required Date:{' '}
             <Text style={styles.detailinfo}> {order['requiredDate']}</Text>
-          </Text>{' '}
+          </Text>
           <Text style={styles.details}>
             Shipped Date:{' '}
             <Text style={styles.detailinfo}> {order['shippedDate']}</Text>
-          </Text>
-          <Text style={styles.details}>
-            Freight: <Text style={styles.detailinfo}> {order['freight']}</Text>
           </Text>{' '}
+          <Text style={styles.details}>
+            Ship Via:{' '}
+            <Text style={styles.detailinfo}> {order['shipVia']}</Text>
+          </Text>
+          <Text style={styles.moredetailtitle}>Supplier Information:</Text>
+          <Text style={styles.details}>
+            Freight:{' '}
+            <Text style={styles.detailinfo}> {order['freight']}</Text>
+          </Text>
           <Text style={styles.details}>
             Ship Name:{' '}
             <Text style={styles.detailinfo}> {order['shipName']}</Text>
-          </Text>
-          <Text style={styles.moredetailtitle}>Supplier Information:</Text>
+          </Text>    
+          
+            <Text style={styles.details}>
+            Ship Address:{' '}
+            <Text style={styles.detailinfo}> {shipAddress['street']}/</Text>
+
+            <Text style={styles.detailinfo}> {shipAddress['city']}/</Text>
+            <Text style={styles.detailinfo}> {shipAddress['region']}/</Text>
+            <Text style={styles.detailinfo}> {shipAddress['postalCode']}/</Text>
+            <Text style={styles.detailinfo}> {shipAddress['country']}</Text>
+          </Text>    
         </View>
       </View>
     </View>

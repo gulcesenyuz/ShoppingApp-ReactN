@@ -73,7 +73,7 @@ export default function AddCategory ({ route, navigation }) {
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   main: {
