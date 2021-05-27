@@ -13,7 +13,7 @@ function TopBar() {
           }}>
       <Image
         style={{ width: 50, height: 50 }}
-        source={require('./img/dish.png')}
+        source={require('../assets/img/dish.png')}
       />
       <View style={styles.nameContainer}>
       <Text style={styles.brandname}>GG Food Shop</Text>

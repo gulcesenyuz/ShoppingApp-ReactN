@@ -63,7 +63,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             onPress={onPress}
             onLongPress={onLongPress}
             style={{ flex: 1 }}>
-            <Text style={{ color: isFocused ? '#ff6e40' : 'grey' }}>
+            <Text style={{ color: isFocused ? '#f07b3f' : 'grey' }}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -86,6 +86,7 @@ function ProductStack(){
             title: 'Products',
             headerStyle: {
               backgroundColor: '#fff',
+              
             },
             headerTintColor: '#4d4d4d',
             headerTitleStyle: {

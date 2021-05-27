@@ -34,6 +34,39 @@ function OrdersScreen({ route, navigation }) {
       });
   };
 
+  
+  var sortBy = (function () {
+    var toString = Object.prototype.toString,
+      // default parser function
+      parse = function (x) {
+        return x;
+      },
+      // gets the item to be sorted
+      getItem = function (x) {
+        var isObject = x != null && typeof x === "object";
+        var isProp = isObject && this.prop in x;
+        return this.parser(isProp ? x[this.prop] : x);
+      };
+
+    
+    return function sortby(array, cfg) {
+      if (!(array instanceof Array && array.length)) return [];
+      if (toString.call(cfg) !== "[object Object]") cfg = {};
+      if (typeof cfg.parser !== "function") cfg.parser = parse;
+      cfg.desc = !!cfg.desc ? -1 : 1;
+      return array.sort(function (a, b) {
+        a = getItem.call(cfg, a);
+        b = getItem.call(cfg, b);
+        return cfg.desc * (a < b ? -1 : +(a > b));
+      });
+    };
+  })();
+
+  const sortedArr = sortBy(orders, {
+    prop: "orderDate",
+    desc: true,
+  });
+
   return (
     <SafeAreaView style={{height:'100%'}}>
     <ScrollView style={{maxHeight:"99%"}}>
@@ -74,6 +107,21 @@ function OrdersScreen({ route, navigation }) {
       </View>
       </ScrollView>
     </SafeAreaView>
+  );
+   return (
+    <View style={styles.maincontainer}>
+      <FlatList
+        style={styles.root}
+        data={sortedArr}
+        ItemSeparatorComponent={() => {
+          return <View style={styles.separator} />;
+        }}
+        keyExtractor={(item) => {
+          return item.id.toString();
+        }}
+        renderItem={renderGridItem}
+      />
+    </View>
   );
 }
 
