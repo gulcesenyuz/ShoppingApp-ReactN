@@ -45,68 +45,79 @@ export default function CategoriesScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={{ height: '100%' }}>
-    <View style={styles.main}>
-      <ScrollView style={{ maxHeight: '99%' }}>
-        {categories.map((eachData) => (
-          <View style={styles.itemContainer}>
-            <ListItem>
-              <ListItem.Content>
-                <ListItem.Title style={styles.title}>
-                  {eachData.name}
-                </ListItem.Title>
-                <ListItem.Subtitle style={styles.description}>
-                  {eachData.description}
-                </ListItem.Subtitle>
-                <View style={styles.row}>
-                  <TouchableOpacity
-                    style={styles.detailbutton}
-                    onPress={() => {
-                      navigation.navigate('CategoryProducts', {
-                        itemId: eachData.id,
-                      });
-                    }}>
-                    <Text style={styles.detailtext}>Products</Text>
-                  </TouchableOpacity>
-                  <View style={styles.iconPosition}>
-                    <AntIcon
-                      name="delete"
-                      style={styles.deleteIcon}
-                      onPress={() => deleteCategory(eachData.id)}
-                    />
+      <View style={styles.main}>
+        <ScrollView style={{ maxHeight: '99%' }}>
+          {categories.map((eachData) => (
+            <View style={styles.itemContainer}>
+              <ListItem>
+                <ListItem.Content>
+                  <ListItem.Title style={styles.title}>
+                    {eachData.name}
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={styles.description}>
+                    {eachData.description}
+                  </ListItem.Subtitle>
+                  <View style={styles.row}>
+                    <TouchableOpacity
+                      style={styles.detailbutton}
+                      onPress={() => {
+                        navigation.navigate('CategoryProducts', {
+                          itemId: eachData.id,
+                        });
+                      }}>
+                      <Text style={styles.detailtext}>Products</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.navigate('UpdateCategory', {
+                          itemId: eachData.id,
+                          itemName: eachData.name,
+                          itemDesc: eachData.description
+                        });
+                      }}>
+                      <Text style={styles.edittext}>Edit</Text>
+                    </TouchableOpacity>
+                    <View style={styles.iconPosition}>
+                      <AntIcon
+                        name="delete"
+                        style={styles.deleteIcon}
+                        onPress={() => deleteCategory(eachData.id)}
+                      />
+                    </View>
                   </View>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          </View>
-        ))}
-      </ScrollView>
-      <FloatingButton style={{ bottom: 80 }} navigation={navigation} />
+                </ListItem.Content>
+              </ListItem>
+            </View>
+          ))}
+        </ScrollView>
+        <FloatingButton style={{ bottom: 80 }} navigation={navigation} />
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-    main: {
+  main: {
     flex: 1,
   },
   deleteIcon: {
     flex: 1,
     color: 'grey',
     fontSize: 20,
-    margin: 10,
+        margin: 8,
+
   },
   iconPosition: {
     paddingTop: 15,
     position: 'relative',
-    marginLeft: 140,
+    marginLeft: 120,
   },
   row: {
     flexDirection: 'row',
     flexWrap: 'nowrap',
   },
   title: {
-    letterSpacing:0.5,
+    letterSpacing: 0.5,
 
     color: '#f07b3f',
     fontWeight: '700',
@@ -144,11 +155,20 @@ const styles = StyleSheet.create({
     alignContent: 'space-around',
   },
   detailtext: {
-   flex: 1,
+    flex: 1,
     padding: 15,
     paddingTop: 5,
     alignItems: 'center',
     fontSize: 12,
     fontWeight: '600',
+  },
+  edittext: {
+    flex: 1,
+    marginTop: 26,
+    marginLeft: 10,
+    alignItems: 'center',
+    fontSize: 12,
+    fontWeight: '600',    color: 'grey',
+
   },
 });

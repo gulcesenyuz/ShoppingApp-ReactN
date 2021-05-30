@@ -20,7 +20,7 @@ function ProductsScreen({ route, navigation }) {
 
   useEffect(() => {
     getDatafromProducts();
-  }, []);
+  }, [products]);
 
   
   const showConfirmDialog = () => {

@@ -28,11 +28,11 @@ export default function IndexPage({ route, navigation }) {
             }}
             style={styles.item}>
             <View style={styles.row}>
-            <View style={styles.imgcontainer}>
-              <Image
-                style={styles.img}
-                source={require('../assets/img/order.jpg')}
-              />
+              <View style={styles.imgcontainer}>
+                <Image
+                  style={styles.img}
+                  source={require('../assets/img/order.jpg')}
+                />
               </View>
               <Text style={styles.text}>Products</Text>
             </View>
@@ -43,11 +43,11 @@ export default function IndexPage({ route, navigation }) {
             }}
             style={styles.item}>
             <View style={styles.row}>
-            <View style={styles.imgcontainer}>
-              <Image
-                style={styles.img}
-                source={require('../assets/img/cate.png')}
-              />
+              <View style={styles.imgcontainer}>
+                <Image
+                  style={styles.img}
+                  source={require('../assets/img/cate.png')}
+                />
               </View>
               <Text style={styles.text}>Categories</Text>
             </View>
@@ -58,11 +58,11 @@ export default function IndexPage({ route, navigation }) {
             }}
             style={styles.item}>
             <View style={styles.row}>
-            <View style={styles.imgcontainer}>
-              <Image
-                style={styles.imghand}
-                source={require('../assets/img/hand.png')}
-              />
+              <View style={styles.imgcontainer}>
+                <Image
+                  style={styles.imghand}
+                  source={require('../assets/img/hand.png')}
+                />
               </View>
               <Text style={styles.text}>Orders</Text>
             </View>
@@ -85,24 +85,19 @@ const styles = StyleSheet.create({
     width: 160,
     height: 120,
     position: 'absolute',
-
   },
-    imghand: {
+  imghand: {
     width: 220,
     height: 120,
     position: 'absolute',
-
   },
-  imgcontainer:{
-    paddingBottom:100,
-    alignContent:'center',
-
-
+  imgcontainer: {
+    paddingBottom: 100,
+    alignContent: 'center',
   },
 
   item: {
     flex: 1,
-
     backgroundColor: '#083358',
     borderRadius: 5,
     shadowColor: 'gray',
@@ -110,9 +105,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 2,
     elevation: 2,
-    paddingHorizontal:0,
-    paddingVertical:0,
-    paddingBottom:20,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+    paddingBottom: 20,
     alignItems: 'flex-start',
     marginHorizontal: '5%',
     marginBottom: 20,
@@ -124,7 +119,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontFamily: 'halfmoon_bold',
     marginVertical: 50,
-    marginLeft:180,
+    marginLeft: 180,
     position: 'absolute',
   },
   sizedBox: {

@@ -18,7 +18,8 @@ import CategoryProductsScreen from './screens/Category/CategoryProductsScreen';
 import TopBar from './components/TopBar';
 import IndexPage from './screens/IndexPage';
 import AddCategory from './screens/Category/AddCategory';
-import OrderDetailScreen from './screens/Order/OrderDetailScreen'
+import OrderDetailScreen from './screens/Order/OrderDetailScreen';
+import UpdateCategory from './screens/Category/UpdateCategory'
 
 const Tab = createBottomTabNavigator();
 
@@ -164,6 +165,20 @@ function CategoryStack(){
           component={ProductDetailScreen}
           options={{
             title: 'Product Detail',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#4d4d4d',
+            headerTitleStyle: {
+              fontWeight: '800',
+            },
+          }}
+        />
+                <Stack.Screen
+          name="UpdateCategory"
+          component={UpdateCategory}
+          options={{
+            title: 'Category Edit',
             headerStyle: {
               backgroundColor: '#fff',
             },

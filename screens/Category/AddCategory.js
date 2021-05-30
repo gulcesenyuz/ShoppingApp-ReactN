@@ -13,7 +13,7 @@ import { Input } from 'react-native-elements';
 
 
 
-export default function AddCategory ({ route, navigation }) {
+export default function AddCategory ({ route, navigation:{ goBack } }) {
   const [categoryName, setcategoryName] = useState('');
   const [description, setdescription] = useState('');
 
@@ -37,6 +37,7 @@ export default function AddCategory ({ route, navigation }) {
           alert(`New Category ${categoryName} Added`);
 
         });
+        goBack();
 
     }
 
