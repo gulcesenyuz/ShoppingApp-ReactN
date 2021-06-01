@@ -67,15 +67,13 @@ function ProductsScreen({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ height:'100%' }}>
       <View style={styles.main}>
-        <ScrollView style={{ maxHeight: '90%' }}>
+        <ScrollView style={{ maxHeight: '99%' }}>
           {products.map((eachData) => (
             <View style={styles.itemContainer}>
               <ListItem>
                 <ListItem.Content>
-                  <View>
-                    <View>
                       <ListItem.Title style={styles.title}>
                         {eachData.name}
                       </ListItem.Title>
@@ -86,7 +84,6 @@ function ProductsScreen({ route, navigation }) {
                           {eachData.unitPrice}$
                         </Text>
                       </ListItem.Subtitle>
-                    </View>
                     <View style={styles.row}>
                       <TouchableOpacity
                         style={styles.detailbutton}
@@ -105,7 +102,6 @@ function ProductsScreen({ route, navigation }) {
                         />
                       </View>
                     </View>
-                  </View>
                 </ListItem.Content>
               </ListItem>
             </View>

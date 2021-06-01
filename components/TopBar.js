@@ -10,6 +10,7 @@ function TopBar() {
           padding:10,
           backgroundColor:'#fff',
             alignContent: "space-between",
+            minHeight:70,
           }}>
       <Image
         style={{ width: 50, height: 50 }}

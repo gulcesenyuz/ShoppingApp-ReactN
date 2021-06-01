@@ -46,7 +46,7 @@ function ProductDetailScreen({ route, navigation }) {
           <Text style={styles.details}>
             Quantity Per Unit:{' '}
             <Text style={styles.detailinfo}> {product['unitPrice']}</Text>
-          </Text>{' '}
+          </Text>
           <Text style={styles.details}>
             Unit In Stock:{' '}
             <Text style={styles.detailinfo}> {product['unitsInStock']}</Text>
@@ -54,7 +54,7 @@ function ProductDetailScreen({ route, navigation }) {
           <Text style={styles.details}>
             Unit On Order:{' '}
             <Text style={styles.detailinfo}> {product['unitsOnOrder']}</Text>
-          </Text>{' '}
+          </Text>
           <Text style={styles.details}>
             Reorder Level:{' '}
             <Text style={styles.detailinfo}> {product['reorderLevel']}</Text>
@@ -67,7 +67,7 @@ function ProductDetailScreen({ route, navigation }) {
           <Text style={styles.details}>
             Contact Name:{' '}
             <Text style={styles.detailinfo}> {supplier['contactName']}</Text>
-          </Text>    
+          </Text>
           <Text style={styles.details}>
             Contact Title:{' '}
             <Text style={styles.detailinfo}> {supplier['contactTitle']}</Text>

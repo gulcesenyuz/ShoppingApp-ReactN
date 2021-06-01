@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginHorizontal: '5%',
     marginBottom: 20,
+    minHeight:120,
   },
   text: {
     fontSize: 16,
@@ -132,5 +133,6 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     alignContent: 'space-between',
     alignItems: 'flex-start',
+    minHeight:100,
   },
 });

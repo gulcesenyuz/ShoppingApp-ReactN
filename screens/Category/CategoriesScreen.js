@@ -18,7 +18,7 @@ export default function CategoriesScreen({ route, navigation }) {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [categories]);
 
   const deleteCategory = (id) => {
     console.log(id);

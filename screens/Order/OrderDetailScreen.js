@@ -46,7 +46,7 @@ function OrderDetailScreen({ route, navigation }) {
           <Text style={styles.details}>
             Order Date:{' '}
             <Text style={styles.detailinfo}> {order['orderDate']}</Text>
-          </Text>{' '}
+          </Text>
           <Text style={styles.details}>
             Required Date:{' '}
             <Text style={styles.detailinfo}> {order['requiredDate']}</Text>
@@ -54,7 +54,7 @@ function OrderDetailScreen({ route, navigation }) {
           <Text style={styles.details}>
             Shipped Date:{' '}
             <Text style={styles.detailinfo}> {order['shippedDate']}</Text>
-          </Text>{' '}
+          </Text>
           <Text style={styles.details}>
             Ship Via:{' '}
             <Text style={styles.detailinfo}> {order['shipVia']}</Text>
@@ -71,8 +71,7 @@ function OrderDetailScreen({ route, navigation }) {
           
             <Text style={styles.details}>
             Ship Address:{' '}
-            <Text style={styles.detailinfo}> {shipAddress['street']}/</Text>
-
+            <Text style={styles.detailinfo}> {shipAddress['street']}/</Text> 
             <Text style={styles.detailinfo}> {shipAddress['city']}/</Text>
             <Text style={styles.detailinfo}> {shipAddress['region']}/</Text>
             <Text style={styles.detailinfo}> {shipAddress['postalCode']}/</Text>

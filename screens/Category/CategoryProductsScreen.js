@@ -47,21 +47,24 @@ function CategoryProductsScreen({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView style={{ maxHeight: '90%' }}>
+    <SafeAreaView style={{ height: '100%' }}>
+      <ScrollView style={{ maxHeight: '99%' }}>
         {products.map((eachData) => (
           <View style={styles.itemContainer}>
             <ListItem>
               <ListItem.Content>
-                <View flexDirection="row">
+                <View flexDirection="column">
                   <View flexDirection="column">
-                    <ListItem.Title style={styles.title}>
-                      {eachData.name}
-                    </ListItem.Title>
-
-                    <ListItem.Subtitle style={styles.price}>
-                      Price: {eachData.unitPrice}$
-                    </ListItem.Subtitle>
+                    <View flexDirection="row">
+                      <ListItem.Title style={styles.title}>
+                        {eachData.name}
+                      </ListItem.Title>
+                    </View>
+                    <View flexDirection="row">
+                      <ListItem.Subtitle style={styles.price}>
+                        Price: {eachData.unitPrice}$
+                      </ListItem.Subtitle>
+                    </View>
                   </View>
                   <View style={styles.row}>
                     <TouchableOpacity
@@ -81,8 +84,6 @@ function CategoryProductsScreen({ route, navigation }) {
                       />
                     </View>
                   </View>
-
-                  <View></View>
                 </View>
               </ListItem.Content>
             </ListItem>
